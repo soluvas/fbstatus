@@ -23,7 +23,9 @@
 					<p>Message: <h:inputText value="#{postView.message}"/></p>
 					<p><h:commandLink action="#{postView.manualPost}" value="Post" styleClass="btn"/></p>
 
-					<p>Last status ID: <h:link target="_blank" outcome="#{postView.lastStatusUrl}" value="#{postView.lastStatusId}"/></p>
+					<h:panelGroup rendered="#{not empty postView.lastStatusId}">
+						<p>Last status ID: <a target="_blank" href="#{postView.lastStatusUrl}">#{postView.lastStatusId}</a></p>
+					</h:panelGroup>
 				</div>
 				</h:form>
 				
