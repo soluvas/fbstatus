@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view>
+<h:head>
+	<meta charset="utf-8" />
+	<title><ui:insert name="pageTitle">Post status to Facebook</ui:insert> | FBStatus</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Post status to Facebook." />
+	<meta name="author" content="FBStatus" />
+
+	<!-- Le styles -->
+
+	<!-- Workaround for JSF resource URLs and css URLs:
+	if URL appended with ?ln=bootstrap, glyph URL is wrong:
+	http://localhost:9080/fbstatus/faces/javax.faces.resource/img/glyphicons-halflings.png
+	should be:
+	http://localhost:9080/fbstatus/faces/javax.faces.resource/bootstrap/img/glyphicons-halflings.png -->
+	<h:outputStylesheet name="bootstrap/css/bootstrap.css"/>
+	<style type="text/css">
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+
+.sidebar-nav {
+	padding: 9px 0;
+}
+</style>
+	<h:outputStylesheet name="bootstrap/css/bootstrap-responsive.css"/>
+
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+	<!-- Le fav and touch icons -->
+	<link rel="shortcut icon" href="#{request.contextPath}/favicon.ico" />
+
+	<!--     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="#{request.contextPath}/resources/bootstrap/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="#{request.contextPath}/resources/bootstrap/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="#{request.contextPath}/resources/bootstrap/ico/apple-touch-icon-57-precomposed.png"> -->
+</h:head>
+
+<h:body>
+
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="#">FBStatus</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+
+						<li class="active"><a href="#{request.contextPath}/">Home</a></li>
+						<li><a href="#about">About</a></li>
+						<li><a href="#contact">Kontak</a></li>
+					</ul>
+					<p class="navbar-text pull-right">
+						<a href="#">Login</a>
+					</p>
+				</div>
+				<!--/.nav-collapse -->
+
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<ui:insert name="content"/>
+
+		<hr />
+
+		<footer>
+		<p>&copy; Hendy Irawan 2012</p>
+		</footer>
+
+	</div>
+	<!--/.container-->
+
+	<!-- Le javascript
+    ================================================== -->
+
+	<!-- Placed at the end of the document so the pages load faster -->
+	<h:outputScript name="jquery.js"/>
+	<h:outputScript library="bootstrap" name="js/bootstrap-transition.js"/>
+	<h:outputScript library="bootstrap" name="js/bootstrap-alert.js"/>
+	<h:outputScript library="bootstrap" name="js/bootstrap-modal.js"/>
+	<h:outputScript library="bootstrap" name="js/bootstrap-dropdown.js"/>
+	
+	<h:outputScript library="bootstrap" name="js/bootstrap-scrollspy.js"/>
+	<h:outputScript library="bootstrap" name="js/bootstrap-tab.js"/>
+	<h:outputScript library="bootstrap" name="js/bootstrap-tooltip.js"/>
+	<h:outputScript library="bootstrap" name="js/bootstrap-popover.js"/>
+	<h:outputScript library="bootstrap" name="js/bootstrap-button.js"/>
+	<h:outputScript library="bootstrap" name="js/bootstrap-collapse.js"/>
+
+	<h:outputScript library="bootstrap" name="js/bootstrap-carousel.js"/>
+	<h:outputScript library="bootstrap" name="js/bootstrap-typeahead.js"/>
+
+</h:body>
+</f:view>
+</html>
