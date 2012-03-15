@@ -8,11 +8,43 @@
   <packaging>war</packaging>
   <name>fbstatus</name>
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <seam.version>3.1.0.Final</seam.version>
     <maven.compiler.source>1.6</maven.compiler.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>1.6</maven.compiler.target>
   </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.jboss.seam</groupId>
+        <artifactId>seam-bom</artifactId>
+        <version>${seam.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.spec</groupId>
+        <artifactId>jboss-javaee-6.0</artifactId>
+        <version>2.0.0.Final</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>1.6.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.seam.faces</groupId>
+      <artifactId>seam-faces</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.seam.international</groupId>
+      <artifactId>seam-international</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.jboss.spec</groupId>
       <artifactId>jboss-javaee-6.0</artifactId>
@@ -24,6 +56,22 @@
       <groupId>com.ocpsoft</groupId>
       <artifactId>prettyfaces-jsf2</artifactId>
       <version>3.3.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.spec.javax.faces</groupId>
+      <artifactId>jboss-jsf-api_2.0_spec</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.restfb</groupId>
+      <artifactId>restfb</artifactId>
+      <version>1.6.9</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-jdk14</artifactId>
+      <version>1.6.4</version>
+      <scope>runtime</scope>
     </dependency>
   </dependencies>
   <profiles>
