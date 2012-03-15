@@ -5,10 +5,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
-import org.jboss.seam.international.status.Messages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,13 +22,14 @@ public class PostView implements Serializable {
 
 	static final long serialVersionUID = 1L;
 	private transient Logger log = LoggerFactory.getLogger(PostView.class);
-	@Inject Messages messages;
+//	@Inject Messages messages;
 	String accessToken;
 	String message;
 	String lastStatusId;
 	String lastStatusUrl;
 	
 	public void manualPost() {
+		FacesContext faces = FacesContext.getCurrentInstance();
 		DefaultFacebookClient client = new DefaultFacebookClient(accessToken);
 		FacebookType response = client.publish("me/feed", FacebookType.class, Parameter.with("message", message));
 		lastStatusId = response.getId();
@@ -38,11 +40,14 @@ public class PostView implements Serializable {
 			String postId = matcher.group(2);
 			lastStatusUrl = "http://www.facebook.com/" + userId + "/posts/" + postId;
 			log.info("Post URL is {}", lastStatusUrl);
-			messages.info("Status posted to Facebook with ID: {0}", lastStatusId);
+			faces.addMessage(null, new FacesMessage(
+					"Status posted to Facebook with ID: " + lastStatusId, ""));
+//			messages.info("Status posted to Facebook with ID: {0}", lastStatusId);
 			message = "";
 		} else {
 			log.error("Cannot parse Post ID: {}", lastStatusId);
-			messages.error("Cannot parse Post ID: {0}", lastStatusId);
+			faces.addMessage(null, new FacesMessage(faces.getMaximumSeverity(),
+					"Cannot parse Post ID: " + lastStatusId, ""));
 		}
 	}
 	
