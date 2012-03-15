@@ -1,3 +1,13 @@
+h1. FBStatus
+
+h2. Credits
+
+FBStatus Icon
+By: 	Pixel Mixer
+License: 	Free for commercial use (Include link to authors website)
+Count: 	168
+Icon set page: 	http://pixel-mixer.com/
+
 Repo layout
 =========== 
 deployments/ - location for built wars (Details below)
