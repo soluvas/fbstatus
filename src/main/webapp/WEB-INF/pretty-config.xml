@@ -15,5 +15,9 @@
 		<pattern value="/contact" />
 		<view-id value="/faces/contact.xhtml" />
 	</url-mapping>
+	<url-mapping id="post">
+		<pattern value="/post" />
+		<view-id value="/faces/post.xhtml" />
+	</url-mapping>
 
 </pretty-config>

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/templates/basic.xhtml">
+
+<ui:define name="pageTitle">Post status to Facebook via access token</ui:define>
+
+<ui:define name="content">
+
+	<div class="row">
+	
+		<div class="span12">
+		
+			<div class="row">
+			
+				<h:form>
+				<div class="span12">
+					<h2>Post Status Manually</h2>
+					<p>Access token: <h:inputText value="#{postView.accessToken}"/></p>
+					<p>Message: <h:inputText value="#{postView.message}"/></p>
+					<p><h:commandLink action="#{postView.manualPost}" value="Post" styleClass="btn"/></p>
+
+					<p>Last status ID: <h:link target="_blank" outcome="#{postView.lastStatusUrl}" value="#{postView.lastStatusId}"/></p>
+				</div>
+				</h:form>
+				
+
+			</div>
+			<!--/row-->
+
+		</div>
+		<!--/span-->
+	</div>
+	<!--/row-->
+
+</ui:define>
+
+</ui:composition>
+
+</html>

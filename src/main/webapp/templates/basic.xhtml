@@ -57,7 +57,8 @@ body {
 				<div class="nav-collapse">
 					<ul class="nav">
 
-						<li class="active"><a href="#{request.contextPath}/">Home</a></li>
+						<li><a href="#{request.contextPath}/">Home</a></li>
+						<li><a href="#{request.contextPath}/post">Post Status</a></li>
 						<li><a href="#{request.contextPath}/about">About</a></li>
 						<li><a href="#{request.contextPath}/contact">Contact</a></li>
 					</ul>
@@ -72,6 +73,13 @@ body {
 	</div>
 
 	<div class="container">
+		
+		<div class="row">
+			<div class="span12">
+				<h:messages/>
+			</div>
+		</div>
+	
 		<ui:insert name="content"/>
 
 		<hr />

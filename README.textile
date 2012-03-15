@@ -1,5 +1,12 @@
 h1. FBStatus
 
+h2. Running Locally
+
+To deploy to local JBoss AS, you need to add a few environment variables. They are (with examples):
+
+bc. OPENSHIFT_DATA_DIR = /together/project/AksiMata/fbstatus_data/ 
+
+
 h2. Credits
 
 FBStatus Icon
