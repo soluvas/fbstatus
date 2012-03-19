@@ -6,7 +6,7 @@
 
 <ui:composition template="/templates/basic.xhtml">
 
-<ui:define name="pageTitle">Post status to Facebook via access token</ui:define>
+<ui:define name="pageTitle">Post status to Facebook</ui:define>
 
 <ui:define name="content">
 
@@ -18,8 +18,8 @@
 			
 				<h:form>
 				<div class="span12">
-					<h2>Post Status Manually</h2>
-					<p>Message: <h:inputText value="#{postView.message}"/></p>
+					<h2>Post Status</h2>
+					<p><h:inputTextarea value="#{postView.message}" style="width: 30em;" rows="4"/></p>
 					<p><h:commandLink action="#{postView.manualPost}" value="Post" styleClass="btn"/></p>
 
 					<h:panelGroup rendered="#{not empty postView.lastStatusId}">
