@@ -19,6 +19,10 @@
 		<pattern value="/post" />
 		<view-id value="/faces/post.xhtml" />
 	</url-mapping>
+	<url-mapping id="history">
+		<pattern value="/history" />
+		<view-id value="/faces/history.xhtml" />
+	</url-mapping>
 
 	<url-mapping id="fb_auth">
 		<pattern value="/fb_auth" />

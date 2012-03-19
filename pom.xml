@@ -12,6 +12,7 @@
     <maven.compiler.source>1.6</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>1.6</maven.compiler.target>
+    <javaee6.web.spec.version>2.0.0.Final</javaee6.web.spec.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -67,11 +68,22 @@
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
       <version>4.1.3</version>
+      <exclusions>
+      	<exclusion>
+      		<artifactId>commons-logging</artifactId>
+      		<groupId>commons-logging</groupId>
+      	</exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>2.1</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.jboss.resteasy</groupId>
+    	<artifactId>resteasy-jaxrs</artifactId>
+    	<version>2.2.0.GA</version>
     </dependency>
   </dependencies>
   <profiles>

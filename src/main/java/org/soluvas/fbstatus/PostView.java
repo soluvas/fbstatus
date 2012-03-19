@@ -1,6 +1,8 @@
 package org.soluvas.fbstatus;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,31 +26,41 @@ public class PostView implements Serializable {
 	private transient Logger log = LoggerFactory.getLogger(PostView.class);
 //	@Inject Messages messages;
 	@Inject UserSession userSession;
+	@Inject PostedStatusDao postedStatusDao;
 	String message;
 	String lastStatusId;
 	String lastStatusUrl;
 	
 	public void manualPost() {
 		FacesContext faces = FacesContext.getCurrentInstance();
-		DefaultFacebookClient client = new DefaultFacebookClient(userSession.getFbAccessToken());
-		FacebookType response = client.publish("me/feed", FacebookType.class, Parameter.with("message", message));
-		lastStatusId = response.getId();
-		log.info("Got Post ID: {}", lastStatusId);
-		Matcher matcher = Pattern.compile("(\\d+)_(\\d+)").matcher(lastStatusId);
-		if (matcher.matches()) {
-			String userId = matcher.group(1);
-			String postId = matcher.group(2);
-			lastStatusUrl = "http://www.facebook.com/" + userId + "/posts/" + postId;
-			log.info("Post URL is {}", lastStatusUrl);
-			faces.addMessage(null, new FacesMessage(
-					"Status posted to Facebook with ID: " + lastStatusId, ""));
-//			messages.info("Status posted to Facebook with ID: {0}", lastStatusId);
-			message = "";
-		} else {
-			log.error("Cannot parse Post ID: {}", lastStatusId);
-			faces.addMessage(null, new FacesMessage(faces.getMaximumSeverity(),
-					"Cannot parse Post ID: " + lastStatusId, ""));
-		}
+		postedStatusDao.createStatus(123L, new Random().nextLong(), message);
+//		DefaultFacebookClient client = new DefaultFacebookClient(userSession.getFbAccessToken());
+//		FacebookType response = client.publish("me/feed", FacebookType.class, Parameter.with("message", message));
+//		lastStatusId = response.getId();
+//		log.info("Got Post ID: {}", lastStatusId);
+//		Matcher matcher = Pattern.compile("(\\d+)_(\\d+)").matcher(lastStatusId);
+//		if (matcher.matches()) {
+//			String userId = matcher.group(1);
+//			String postId = matcher.group(2);
+//			lastStatusUrl = "http://www.facebook.com/" + userId + "/posts/" + postId;
+//			log.info("Post URL is {}", lastStatusUrl);
+//			faces.addMessage(null, new FacesMessage(
+//					"Status posted to Facebook with ID: " + lastStatusId, ""));
+////			messages.info("Status posted to Facebook with ID: {0}", lastStatusId);
+//			message = "";
+//		} else {
+//			log.error("Cannot parse Post ID: {}", lastStatusId);
+//			faces.addMessage(null, new FacesMessage(faces.getMaximumSeverity(),
+//					"Cannot parse Post ID: " + lastStatusId, ""));
+//		}
+	}
+	 
+	public List<PostedStatus> getPostedStatuses() {
+		List<PostedStatus> result = postedStatusDao.findAll();
+		PostedStatus ps = new PostedStatus();
+		ps.setMessage("Halo");
+		result.add(ps);
+		return result;
 	}
 	
 	public String getMessage() {
