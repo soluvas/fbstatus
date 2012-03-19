@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
@@ -23,14 +23,14 @@ public class PostView implements Serializable {
 	static final long serialVersionUID = 1L;
 	private transient Logger log = LoggerFactory.getLogger(PostView.class);
 //	@Inject Messages messages;
-	String accessToken;
+	@Inject UserSession userSession;
 	String message;
 	String lastStatusId;
 	String lastStatusUrl;
 	
 	public void manualPost() {
 		FacesContext faces = FacesContext.getCurrentInstance();
-		DefaultFacebookClient client = new DefaultFacebookClient(accessToken);
+		DefaultFacebookClient client = new DefaultFacebookClient(userSession.getFbAccessToken());
 		FacebookType response = client.publish("me/feed", FacebookType.class, Parameter.with("message", message));
 		lastStatusId = response.getId();
 		log.info("Got Post ID: {}", lastStatusId);
@@ -51,12 +51,6 @@ public class PostView implements Serializable {
 		}
 	}
 	
-	public String getAccessToken() {
-		return accessToken;
-	}
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
 	public String getMessage() {
 		return message;
 	}

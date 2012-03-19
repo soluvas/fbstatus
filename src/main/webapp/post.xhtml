@@ -19,13 +19,14 @@
 				<h:form>
 				<div class="span12">
 					<h2>Post Status Manually</h2>
-					<p>Access token: <h:inputText value="#{postView.accessToken}"/></p>
 					<p>Message: <h:inputText value="#{postView.message}"/></p>
 					<p><h:commandLink action="#{postView.manualPost}" value="Post" styleClass="btn"/></p>
 
 					<h:panelGroup rendered="#{not empty postView.lastStatusId}">
 						<p>Last status ID: <a target="_blank" href="#{postView.lastStatusUrl}">#{postView.lastStatusId}</a></p>
 					</h:panelGroup>
+					
+					<p><small>Access token: #{userSession.fbAccessToken}</small></p>
 				</div>
 				</h:form>
 				

@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.List;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +18,13 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.ws.rs.core.UriBuilder;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +38,7 @@ public class FacebookAuthenticator {
 	private transient Logger log = LoggerFactory.getLogger(FacebookAuthenticator.class);
 	private String appId = "";
 	private String appKey = "";
+	private URI redirectUri;
 	
 	@PostConstruct public void init() throws IOException {
 		// Load Facebook App credentials from ${OPENSHIFT_DATA_DIR}/fbstatus.properties if exists,
@@ -51,15 +60,18 @@ public class FacebookAuthenticator {
 		appId = props.getProperty("facebook.app.id");
 		appKey = props.getProperty("facebook.app.key");
 		log.info("App ID: {}", appId);
-	}
-	
-	public URI getRedirectUri() {
+		
+		// Generate redirect URI
 		final ExternalContext external = FacesContext.getCurrentInstance()
 				.getExternalContext();
-		return UriBuilder.fromPath(external.encodeActionURL("/fb_auth"))
+		redirectUri = UriBuilder.fromPath(external.encodeActionURL("/faces/fb_auth.xhtml"))
 				.scheme(external.getRequestScheme())
 				.host(external.getRequestServerName())
 				.port(external.getRequestServerPort()).build();
+	}
+	
+	public URI getRedirectUri() {
+		return redirectUri;
 	}
 
 	public URI getAuthorizeUri() {
@@ -67,4 +79,14 @@ public class FacebookAuthenticator {
 			.queryParam("redirect_uri", getRedirectUri())
 			.queryParam("scope", "publish_stream").build();
 	}
+	
+	public URI getAccessTokenUri(String authCode) {
+		return UriBuilder
+				.fromUri("https://graph.facebook.com/oauth/access_token")
+				.queryParam("client_id", appId)
+				.queryParam("redirect_uri", getRedirectUri())
+				.queryParam("client_secret", appKey)
+				.queryParam("code", authCode).build();
+	}
+	
 }
