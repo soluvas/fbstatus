@@ -8,8 +8,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Scanner;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -18,7 +19,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.ws.rs.core.UriBuilder;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -87,6 +87,32 @@ public class FacebookAuthenticator {
 				.queryParam("redirect_uri", getRedirectUri())
 				.queryParam("client_secret", appSecret)
 				.queryParam("code", authCode).build();
+	}
+
+	/**
+	 * Sets the authCode received from Facebook and exchanges it with the access token.
+	 * @param authCode
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public String fetchAccessToken(String authCode) throws ClientProtocolException, IOException {
+		log.info("Retrieving access token using authCode {}", authCode);
+		URI accessTokenUri = getAccessTokenUri(authCode);
+		DefaultHttpClient client = new DefaultHttpClient();
+		HttpGet accessTokenReq = new HttpGet(accessTokenUri);
+		HttpResponse response = client.execute(accessTokenReq);
+		if (response.getStatusLine().getStatusCode() != 200)
+			throw new IOException(String.format("GET %s throws HTTP Error %d: %s",
+					accessTokenUri, response.getStatusLine().getStatusCode(), response.getStatusLine().getReasonPhrase()));
+		Scanner scanner = new Scanner(response.getEntity().getContent());
+		ArrayList<NameValuePair> data = new ArrayList<NameValuePair>();
+		URLEncodedUtils.parse(data, scanner, "UTF-8");
+		// Probably due to non-existing Content-Encoding, this one is not working:
+//		List<NameValuePair> data = URLEncodedUtils.parse(response.getEntity());
+		// see: https://issues.apache.org/jira/browse/HTTPCLIENT-1175
+		String accessToken = data.get(0).getValue();
+		//log.debug("Access token = {}", fbAccessToken); // security risk?
+		return accessToken;
 	}
 	
 }
