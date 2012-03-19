@@ -20,4 +20,9 @@
 		<view-id value="/faces/post.xhtml" />
 	</url-mapping>
 
+	<url-mapping id="fb_auth">
+		<pattern value="/fb_auth" />
+		<view-id value="/faces/fb_auth.xhtml" />
+	</url-mapping>
+
 </pretty-config>
