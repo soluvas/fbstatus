@@ -11,33 +11,22 @@
 <ui:define name="content">
 
 	<div class="row">
-	
 		<div class="span12">
 		
-			<div class="row">
-			
-				<h:form>
-				<div class="span12">
-					<h2>Post Status</h2>
-					<p><h:inputTextarea value="#{postView.message}" style="width: 30em;" rows="4"/></p>
-					<p><h:commandLink action="#{postView.manualPost}" value="Post" styleClass="btn"/></p>
+			<h:form>
+				<h2>Post Status</h2>
+				<p><h:inputTextarea value="#{postView.message}" style="width: 30em;" rows="4"/></p>
+				<p><h:commandLink action="#{postView.manualPost}" value="Post" styleClass="btn"/></p>
 
-					<h:panelGroup rendered="#{not empty postView.lastStatusId}">
-						<p>Last status ID: <a target="_blank" href="#{postView.lastStatusUrl}">#{postView.lastStatusId}</a></p>
-					</h:panelGroup>
-					
-					<p><small>Access token: #{userSession.fbAccessToken}</small></p>
-				</div>
-				</h:form>
+				<h:panelGroup rendered="#{not empty postView.lastStatusId}">
+					<p>Last status ID: <a target="_blank" href="#{postView.lastStatusUrl}">#{postView.lastStatusId}</a></p>
+				</h:panelGroup>
 				
+				<p><small>Access token: #{userSession.fbAccessToken}</small></p>
+			</h:form>
 
-			</div>
-			<!--/row-->
-
-		</div>
-		<!--/span-->
-	</div>
-	<!--/row-->
+		</div> <!--/span-->
+	</div> <!--/row-->
 
 </ui:define>
 
