@@ -37,7 +37,7 @@ public class FacebookAuthenticator {
 
 	private transient Logger log = LoggerFactory.getLogger(FacebookAuthenticator.class);
 	private String appId = "";
-	private String appKey = "";
+	private String appSecret = "";
 	private URI redirectUri;
 	
 	@PostConstruct public void init() throws IOException {
@@ -58,7 +58,7 @@ public class FacebookAuthenticator {
 			props.load(stream);
 		}
 		appId = props.getProperty("facebook.app.id");
-		appKey = props.getProperty("facebook.app.key");
+		appSecret = props.getProperty("facebook.app.secret");
 		log.info("App ID: {}", appId);
 		
 		// Generate redirect URI
@@ -85,7 +85,7 @@ public class FacebookAuthenticator {
 				.fromUri("https://graph.facebook.com/oauth/access_token")
 				.queryParam("client_id", appId)
 				.queryParam("redirect_uri", getRedirectUri())
-				.queryParam("client_secret", appKey)
+				.queryParam("client_secret", appSecret)
 				.queryParam("code", authCode).build();
 	}
 	
