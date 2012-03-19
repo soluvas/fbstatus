@@ -3,8 +3,8 @@
 	<persistence-unit name="fbstatus">
 		<jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
 		<class>org.soluvas.fbstatus.PostedStatus</class>
-<!-- 		<properties> -->
-<!-- 			<property name="hibernate.hbm2ddl.auto" value="create"/> -->
-<!-- 		</properties> -->
+		<properties>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+		</properties>
 	</persistence-unit>
 </persistence>

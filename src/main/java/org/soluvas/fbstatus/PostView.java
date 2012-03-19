@@ -57,9 +57,6 @@ public class PostView implements Serializable {
 	 
 	public List<PostedStatus> getPostedStatuses() {
 		List<PostedStatus> result = postedStatusDao.findAll();
-		PostedStatus ps = new PostedStatus();
-		ps.setMessage("Halo");
-		result.add(ps);
 		return result;
 	}
 	

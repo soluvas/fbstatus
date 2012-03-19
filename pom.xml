@@ -8,6 +8,7 @@
   <packaging>war</packaging>
   <name>fbstatus</name>
   <properties>
+		<org.richfaces.bom.version>4.2.0.Final</org.richfaces.bom.version>
     <seam.version>3.1.0.Final</seam.version>
     <maven.compiler.source>1.6</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,9 +24,33 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
+	<dependency>
+		<groupId>org.richfaces</groupId>
+		<artifactId>richfaces-bom</artifactId>
+		<version>${org.richfaces.bom.version}</version>
+		<scope>import</scope>
+		<type>pom</type>
+	</dependency>
+
     </dependencies>
   </dependencyManagement>
   <dependencies>
+	<dependency>
+		<groupId>org.richfaces.ui</groupId>
+		<artifactId>richfaces-components-ui</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.richfaces.core</groupId>
+		<artifactId>richfaces-core-impl</artifactId>
+	</dependency>
+
+	<dependency>
+		<groupId>org.richfaces.cdk</groupId>
+		<artifactId>annotations</artifactId>
+		<version>${org.richfaces.bom.version}</version>
+	</dependency>
+  
     <dependency>
       <groupId>joda-time</groupId>
       <artifactId>joda-time</artifactId>

@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich">
 
 <ui:composition template="/WEB-INF/templates/basic.xhtml">
 
@@ -16,14 +17,31 @@
 		
 			<h2>Status History</h2>
 			
-			<h:dataTable value="#{postView.postedStatuses}" var="post">
-				<h:column>
-					<f:facet name="header">Message</f:facet>
-					#{post.message}
-				</h:column>
-			</h:dataTable>
-			
-			<p>Total: #{postView.postedStatuses.size()} statuses.</p>
+			<h:form>
+				<rich:dataTable value="#{postView.postedStatuses}" var="post" rows="20">
+					<h:column>
+						<f:facet name="header">Message</f:facet>
+						#{post.message}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Profile</f:facet>
+						<a href="#{post.profileUri}">#{post.profileId}</a>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Post</f:facet>
+						<a href="#{post.postUri}">#{post.postId}</a>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Time</f:facet>
+						#{post.created}
+					</h:column>
+					<f:facet name="footer">
+						<rich:dataScroller/>
+					</f:facet>
+				</rich:dataTable>
+				
+				<p>Total: #{postView.postedStatuses.size()} statuses.</p>
+			</h:form>
 
 		</div>
 		<!--/span-->

@@ -23,6 +23,14 @@ public class PostedStatus {
 	@Temporal(TemporalType.TIMESTAMP)
 	Date created;
 	
+	public String getProfileUri() {
+		return "http://www.facebook.com/profile.php?id=" + getProfileId();
+	}
+	
+	public String getPostUri() {
+		return "http://www.facebook.com/" + getProfileId() + "/" + getPostId();
+	}
+	
 	public Long getId() {
 		return id;
 	}

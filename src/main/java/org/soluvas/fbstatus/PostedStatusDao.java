@@ -1,5 +1,6 @@
 package org.soluvas.fbstatus;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -13,7 +14,8 @@ public class PostedStatusDao {
 	@PersistenceContext EntityManager em;
 	
 	public List<PostedStatus> findAll() {
-		List<PostedStatus> result = em.createQuery("SELECT ps FROM PostedStatus ps", PostedStatus.class).getResultList();
+		List<PostedStatus> result = em.createQuery(
+				"SELECT ps FROM PostedStatus ps ORDER BY ps.created DESC", PostedStatus.class).getResultList();
 		return result;
 	}
 	
@@ -22,6 +24,7 @@ public class PostedStatusDao {
 		status.setPostId(postId);
 		status.setProfileId(profileId);
 		status.setMessage(message);
+		status.setCreated(new Date());
 		em.merge(status);
 		return status;
 	}
