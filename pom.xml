@@ -105,11 +105,10 @@
       <artifactId>commons-io</artifactId>
       <version>2.1</version>
     </dependency>
-    <dependency>
-    	<groupId>org.jboss.resteasy</groupId>
-    	<artifactId>resteasy-jaxrs</artifactId>
-    	<version>2.2.0.GA</version>
-    </dependency>
+	<dependency>
+		<groupId>org.jboss.spec.javax.ws.rs</groupId>
+		<artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
+	</dependency>
   </dependencies>
   <profiles>
     <profile>
