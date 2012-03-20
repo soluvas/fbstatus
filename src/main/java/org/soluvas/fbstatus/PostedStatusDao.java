@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 @Named @Stateless
 public class PostedStatusDao {
 
-	@PersistenceContext(unitName="primary") EntityManager em;
+	@PersistenceContext EntityManager em;
 	
 	public List<PostedStatus> findAll() {
 		List<PostedStatus> result = em.createQuery(
