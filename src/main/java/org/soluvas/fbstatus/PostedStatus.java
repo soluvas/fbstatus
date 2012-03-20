@@ -28,7 +28,7 @@ public class PostedStatus {
 	}
 	
 	public String getPostUri() {
-		return "http://www.facebook.com/" + getProfileId() + "/" + getPostId();
+		return "http://www.facebook.com/" + getProfileId() + "/posts/" + getPostId();
 	}
 	
 	public Long getId() {
