@@ -45,9 +45,10 @@ public class PostView implements Serializable {
 			faces.addMessage(null, new FacesMessage(
 					"Status posted to Facebook with ID: " + lastStatusId, ""));
 //			messages.info("Status posted to Facebook with ID: {0}", lastStatusId);
-			message = "";
 			
 			postedStatusDao.createStatus(Long.valueOf(userId), Long.valueOf(postId), message);
+			
+			message = "";
 		} else {
 			log.error("Cannot parse Post ID: {}", lastStatusId);
 			faces.addMessage(null, new FacesMessage(faces.getMaximumSeverity(),
